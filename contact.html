@@ -1,0 +1,219 @@
+<!doctype html><html lang="en"><head><title>Contact — Aditya Rao</title>
+<meta name="description" content="Contact — email, cal.com booking, location (Navi Mumbai) with local time and weather." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Leaflet (no keys needed) -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/topojson-client@3"></script>
+
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0B1220', subink: '#5A6B85',
+            surface: '#FFFFFF', subtle: '#F7F9FC', stroke: '#E5EAF1',
+            blue: {50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',300:'#93C5FD',400:'#60A5FA',500:'#3B82F6',600:'#2563EB',700:'#1D4ED8'}
+          },
+          boxShadow: { card: '0 4px 20px rgba(11,18,32,0.06)' },
+          fontFamily: { sans:['Inter','system-ui','sans-serif'], display:['Space Grotesk','Inter','sans-serif'] },
+        }
+      }
+    }
+  </script>
+
+<style>
+  /* Card layout for the widget */
+  .whereami {
+    border-radius: 16px;
+    border: 1px solid rgba(0,0,0,.08);
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(11,18,32,.08);
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: minmax(220px, 42%) 1fr;
+  }
+
+  /* Map pane (forced light theme) */
+  #map-navi { height: 230px; background: #f2f2f2; }
+  .leaflet-container { background: transparent; }
+  .leaflet-tile { border:0!important; outline:1px solid transparent; }
+  .leaflet-control-container { display: none; } /* hides zoom + attribution UI */
+
+  /* Info pane */
+  .wa-body { padding: 16px 18px; display: flex; flex-direction: column; justify-content: center; }
+  .wa-title { font-family: ui-rounded, SF Pro Rounded, Inter, system-ui, sans-serif; font-weight: 700; letter-spacing: .2px; }
+  .wa-sub { color: #5A6B85; }
+
+  /* Chips */
+  .chip { display:inline-flex; align-items:center; gap:.4rem; font-size: 12px; padding:.35rem .6rem; border-radius:9999px; border:1px solid rgba(0,0,0,.08); }
+
+  /* City pill overlay on map */
+  .pill {
+    position:absolute; top:10px; left:10px;
+    padding:.28rem .6rem; border-radius:9999px;
+    font:600 11px/1.2 system-ui,-apple-system,Segoe UI,Inter,sans-serif;
+    text-transform:uppercase; letter-spacing:.06em;
+    backdrop-filter: blur(6px);
+    color:#111827; background:rgba(255,255,255,.65); border:1px solid rgba(0,0,0,.08);
+  }
+</style>
+
+  <style>
+    :root { --bg:#F7F9FC; }
+    body { background: var(--bg); }
+    header.scrolled { box-shadow: 0 6px 20px rgba(11,18,32,.06); }
+    .reveal { opacity:0; transform:translateY(8px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in-view { opacity:1; transform:none; }
+    .hover-lift { transition: transform .25s ease, box-shadow .25s ease; }
+    .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(11,18,32,.08); }
+    .tilt-oscillate { animation: floatTilt 6s ease-in-out infinite; transform-origin:center; }
+    @keyframes floatTilt { 0%,100%{ transform: rotate(-2deg) translateY(0);} 50%{ transform: rotate(-1deg) translateY(-4px);} }
+    .chip { border:1px solid #E5EAF1; padding:.35rem .75rem; border-radius:9999px; white-space:nowrap; }
+    .progress { height:8px; background:#E5EAF1; border-radius:9999px; overflow:hidden; }
+    .progress>span { display:block; height:100%; background:#2563EB; width:var(--val,0%); transition:width .6s ease; }
+    @media (prefers-reduced-motion: reduce) { .reveal, .hover-lift, .tilt-oscillate { transition:none!important; animation:none!important; } }
+  </style>
+</head>
+<body class="text-ink antialiased">
+  <header id="site-header" class="sticky top-0 z-20 border-b border-stroke/70 bg-white/80 backdrop-blur">
+    <nav class="mx-auto max-w-5xl px-5">
+      <div class="flex h-14 items-center gap-4">
+        <a href="index.html" class="font-display text-lg tracking-tight">Aditya Rao</a>
+        <div class="ml-auto flex items-center gap-5 text-sm">
+          <a href="index.html" class="navlink">Home</a>
+          <a href="about.html" class="navlink">About</a>
+          <a href="blog.html" class="navlink">Blog</a>
+          <a href="work.html" class="navlink">Work</a>
+          <span class="text-subink">Contact</span>
+          <a href="contact.html#book" class="rounded-full bg-blue-600 px-3 py-1 text-white">Say hi</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+<main class="mx-auto max-w-5xl px-5 py-10">
+<header class="mb-8"><h1 class="font-display text-4xl leading-tight">Contact</h1>
+<p class="mt-2 max-w-3xl text-subink">Email works best. Or book a quick call. I’m in Navi Mumbai; times below are IST.</p></header>
+
+<section id="book" class="rounded-2xl border border-stroke bg-surface p-0 shadow-card hover-lift reveal">
+  <div class="p-6"><h2 class="font-display text-2xl">Let’s Connect</h2><p class="mt-2 text-sm text-subink">Schedule a call or arrange an in-person meeting at your convenience.</p></div>
+  <div class="border-t border-stroke">
+    <iframe title="Book a call with Aditya Rao" src="https://cal.com/adityarawr/meet?overlayCalendar=true&layout=column_view&theme=light"
+      class="h-[720px] w-full" style="background:#fff" frameborder="0" loading="lazy"
+      allow="microphone; camera; fullscreen; autoplay; encrypted-media"></iframe>
+  </div>
+  <div class="px-6 pb-5 pt-3 text-xs text-subink">If the embed doesn’t load, <a href="https://cal.com/adityarawr/meet?overlayCalendar=true" class="text-blue-700 underline" target="_blank" rel="noreferrer noopener">open in new tab</a>.</div>
+</section>
+
+<div class="mt-6 grid gap-6 md:grid-cols-2">
+  <!-- Where I am widget -->
+  <section class="whereami">
+    <!-- Map -->
+    <div style="position:relative">
+      <div id="map-navi"></div>
+      <div class="pill">NAVI&nbsp;MUMBAI</div>
+    </div>
+
+    <!-- Info -->
+    <div class="wa-body">
+      <div class="wa-title">Currently in <span style="font-weight:800">Navi Mumbai, IN</span></div>
+      <div class="wa-sub" style="margin-top:4px">Local time & weather</div>
+      <div style="display:flex; gap:.5rem; flex-wrap:wrap; margin-top:10px">
+        <span class="chip"><span>🕒</span><span id="ist-time">--:-- IST</span></span>
+        <span class="chip"><span>⛅</span><span id="wx">—°C</span></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="rounded-2xl border border-stroke bg-surface p-6 shadow-card hover-lift reveal">
+    <h2 class="font-display text-2xl">Details</h2>
+    <ul class="mt-2 text-sm leading-7 text-ink/90">
+      <li>Email: <a id="email-link" class="text-blue-700 underline" href="mailto:hello@example.com">hello@example.com</a> <button id="copy-email" class="ml-2 rounded-full border border-stroke px-2 py-0.5 text-xs">Copy</button></li>
+      <li>Bluesky: <a class="text-blue-700 underline" href="#">@aditya</a></li>
+      <li>GitHub: <a class="text-blue-700 underline" href="#">github.com/aditya</a></li>
+    </ul>
+    <div class="mt-3 flex flex-wrap gap-2 text-xs text-subink"><span class="chip">Usually replies within a day</span><span class="chip">Neutral, no-spam inbox</span></div>
+  </section>
+</div>
+</main>
+
+  <footer class="border-t border-stroke/70 py-8 text-xs text-subink">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-5">
+      <span>Made lightly.</span>
+      <span id="today"></span>
+    </div>
+  </footer>
+
+
+<script>
+  // Light tiles (already in your page)
+  const LIGHT = "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+  const map = L.map("map-navi", {
+    center: [19.033, 73.029],
+    zoom: 11,
+    zoomControl: false,
+    attributionControl: false
+  });
+  L.tileLayer(LIGHT, { subdomains: "abcd", maxZoom: 19, detectRetina: true, crossOrigin: true }).addTo(map);
+
+  // Load prebuilt geometry (instant)
+  Promise.all([
+    fetch('/data/navi.widget.topo.json').then(r => r.json()),
+    fetch('/data/navi.label.json').then(r => r.json())
+  ]).then(([topo, label]) => {
+    const gj = topojson.feature(topo, topo.objects[Object.keys(topo.objects)[0]]);
+    const layer = L.geoJSON(gj, {
+      style: { color: '#f5b301', weight: 2, opacity: 1, fillColor: 'rgba(245,179,1,0.16)', fillOpacity: 0.16 }
+    }).addTo(map);
+
+    const bounds = layer.getBounds();
+    if (bounds.isValid()) map.fitBounds(bounds.pad(0.06));
+
+    const p = label.features[0].geometry.coordinates; // [lng,lat]
+    L.marker([p[1], p[0]], {
+      icon: L.divIcon({ className: 'pill', html: 'NAVI&nbsp;MUMBAI', iconSize: null })
+    }).addTo(map);
+  }).catch(err => {
+    console.warn('Boundary load failed', err);
+    // graceful fallback: center only
+  });
+</script>
+
+<script>
+  /* keep the existing page interactions */
+  const toReveal = Array.from(document.querySelectorAll('.reveal'));
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+  }, { rootMargin:'0px 0px -10% 0px', threshold:0.12 });
+  toReveal.forEach((el,i)=>{ el.style.transitionDelay = `${Math.min(i*40,240)}ms`; io.observe(el); });
+
+  const headerEl = document.getElementById('site-header');
+  function onScroll(){ if(window.scrollY>4) headerEl.classList.add('scrolled'); else headerEl.classList.remove('scrolled'); }
+  onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
+
+  function istTime(){ try { return new Intl.DateTimeFormat('en-IN', { timeStyle:'short', timeZone:'Asia/Kolkata' }).format(new Date()); } catch { return '--:--'; } }
+  function tick(){
+    const t = istTime();
+    document.querySelectorAll('[data-ist]').forEach(el=> el.textContent = `🕒 ${t} IST`);
+    const today = new Date().toISOString().slice(0,10);
+    const td = document.getElementById('today'); if (td) td.textContent = today;
+  }
+  tick(); setInterval(tick, 60000);
+
+  const copyBtn = document.getElementById('copy-email');
+  const emailLink = document.getElementById('email-link');
+  if (copyBtn && emailLink) copyBtn.addEventListener('click', async (e)=>{
+    e.preventDefault();
+    try { await navigator.clipboard.writeText(emailLink.textContent.trim()); copyBtn.textContent='Copied ✓'; setTimeout(()=>copyBtn.textContent='Copy',1500); } catch {}
+  });
+</script>
+
+</body></html>

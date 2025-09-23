@@ -1,0 +1,108 @@
+<!doctype html><html lang="en"><head><title>Blog — Aditya Rao</title>
+<meta name="description" content="Blog — simple posts and notes." />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0B1220', subink: '#5A6B85',
+            surface: '#FFFFFF', subtle: '#F7F9FC', stroke: '#E5EAF1',
+            blue: {50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',300:'#93C5FD',400:'#60A5FA',500:'#3B82F6',600:'#2563EB',700:'#1D4ED8'}
+          },
+          boxShadow: { card: '0 4px 20px rgba(11,18,32,0.06)' },
+          fontFamily: { sans:['Inter','system-ui','sans-serif'], display:['Space Grotesk','Inter','sans-serif'] },
+        }
+      }
+    }
+  </script>
+  <style>
+    :root { --bg:#F7F9FC; }
+    body { background: var(--bg); }
+    header.scrolled { box-shadow: 0 6px 20px rgba(11,18,32,.06); }
+    .reveal { opacity:0; transform:translateY(8px); transition: opacity .6s ease, transform .6s ease; }
+    .reveal.in-view { opacity:1; transform:none; }
+    .hover-lift { transition: transform .25s ease, box-shadow .25s ease; }
+    .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(11,18,32,.08); }
+    .tilt-oscillate { animation: floatTilt 6s ease-in-out infinite; transform-origin:center; }
+    @keyframes floatTilt { 0%,100%{ transform: rotate(-2deg) translateY(0);} 50%{ transform: rotate(-1deg) translateY(-4px);} }
+    .chip { border:1px solid #E5EAF1; padding:.35rem .75rem; border-radius:9999px; white-space:nowrap; }
+    .progress { height:8px; background:#E5EAF1; border-radius:9999px; overflow:hidden; }
+    .progress>span { display:block; height:100%; background:#2563EB; width:var(--val,0%); transition:width .6s ease; }
+    @media (prefers-reduced-motion: reduce) { .reveal, .hover-lift, .tilt-oscillate { transition:none!important; animation:none!important; } }
+  </style>
+</head>
+<body class="text-ink antialiased">
+  <header id="site-header" class="sticky top-0 z-20 border-b border-stroke/70 bg-white/80 backdrop-blur">
+    <nav class="mx-auto max-w-5xl px-5">
+      <div class="flex h-14 items-center gap-4">
+        <a href="index.html" class="font-display text-lg tracking-tight">Aditya Rao</a>
+        <div class="ml-auto flex items-center gap-5 text-sm">
+          <a href="index.html" class="navlink">Home</a>
+          <a href="about.html" class="navlink">About</a>
+          <span class="text-subink">Blog</span>
+          <a href="work.html" class="navlink">Work</a>
+          <a href="contact.html" class="navlink">Contact</a>
+          <a href="contact.html#book" class="rounded-full bg-blue-600 px-3 py-1 text-white">Say hi</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+<main class="mx-auto max-w-5xl px-5 py-10">
+<header class="mb-6"><h1 class="font-display text-4xl leading-tight">Blog</h1><p class="text-subink">Simple posts and notes.</p></header>
+<div class="grid gap-4 sm:grid-cols-2">
+  <article class="rounded-2xl border border-stroke bg-surface p-5 shadow-card hover-lift reveal"><p class="text-xs text-subink">2025-09-18</p><h3 class="mt-1 font-display text-xl">Rain after 4pm</h3><p class="mt-2 text-ink/90">Kept an easy pace. Reading felt better in the evening.</p></article>
+  <article class="rounded-2xl border border-stroke bg-surface p-5 shadow-card hover-lift reveal"><p class="text-xs text-subink">2025-09-16</p><h3 class="mt-1 font-display text-xl">Three sentences about tone</h3><p class="mt-2 text-ink/90">Flute practice focused on breath. Recorded a 10s clip.</p></article>
+</div>
+</main>
+
+  <footer class="border-t border-stroke/70 py-8 text-xs text-subink">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-5">
+      <span>Made lightly.</span>
+      <span id="today"></span>
+    </div>
+  </footer>
+
+  <script>
+    const toReveal = Array.from(document.querySelectorAll('.reveal'));
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
+    }, { rootMargin:'0px 0px -10% 0px', threshold:0.12 });
+    toReveal.forEach((el,i)=>{ el.style.transitionDelay = `${Math.min(i*40,240)}ms`; io.observe(el); });
+
+    const headerEl = document.getElementById('site-header');
+    function onScroll(){ if(window.scrollY>4) headerEl.classList.add('scrolled'); else headerEl.classList.remove('scrolled'); }
+    onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
+
+    function istTime(){ try { return new Intl.DateTimeFormat('en-IN', { timeStyle:'short', timeZone:'Asia/Kolkata' }).format(new Date()); } catch { return '--:--'; } }
+    function tick(){
+      const t = istTime();
+      document.querySelectorAll('[data-ist]').forEach(el=> el.textContent = `🕒 ${t} IST`);
+      const today = new Date().toISOString().slice(0,10);
+      const td = document.getElementById('today'); if (td) td.textContent = today;
+    }
+    tick(); setInterval(tick, 60000);
+
+    const copyBtn = document.getElementById('copy-email');
+    const emailLink = document.getElementById('email-link');
+    if (copyBtn && emailLink) copyBtn.addEventListener('click', async (e)=>{
+      e.preventDefault();
+      try { await navigator.clipboard.writeText(emailLink.textContent.trim()); copyBtn.textContent='Copied ✓'; setTimeout(()=>copyBtn.textContent='Copy',1500); } catch {}
+    });
+
+    const setBtn = document.getElementById('set-weather');
+    const weatherEl = document.getElementById('weather');
+    if (setBtn && weatherEl) setBtn.addEventListener('click', ()=>{
+      const temp = prompt('Temperature in °C (e.g., 29)');
+      const cond = prompt('Condition (e.g., Cloudy, Clear, Rain)');
+      if (temp) weatherEl.textContent = `${cond ? cond+' ' : ''}${temp}°C`;
+    });
+  </script>
+
+</body></html>
