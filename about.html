@@ -22,6 +22,10 @@
     }
   </script>
   <style>
+    .pfp {
+      background: url(/assets/img/aditya-cycling.jpg);
+      background-size: cover;
+    }
     :root { --bg:#F7F9FC; }
     body { background: var(--bg); }
     header.scrolled { box-shadow: 0 6px 20px rgba(11,18,32,.06); }
@@ -45,7 +49,7 @@
         <div class="ml-auto flex items-center gap-5 text-sm">
           <a href="index.html" class="navlink">Home</a>
           <span class="text-subink">About</span>
-          <a href="blog.html" class="navlink">Blog</a>
+          <a href="comingsoon.html" class="navlink">Blog</a>
           <a href="work.html" class="navlink">Work</a>
           <a href="contact.html" class="navlink">Contact</a>
           <a href="contact.html#book" class="rounded-full bg-blue-600 px-3 py-1 text-white">Say hi</a>
@@ -61,7 +65,7 @@
 <section class="space-y-8">
   <article class="rounded-2xl border border-stroke bg-surface p-5 shadow-card hover-lift reveal">
     <div class="flex items-center gap-5">
-      <div class="overflow-hidden rounded-xl border border-stroke bg-white p-1 tilt-oscillate" style="transform: rotate(-2deg);"><div class="h-32 w-28 rounded-lg bg-[linear-gradient(135deg,#dbeafe,#bfdbfe)]"></div></div>
+      <div class="overflow-hidden rounded-xl border border-stroke bg-white p-1 tilt-oscillate" style="transform: rotate(-2deg);"><div class="h-56 w-56 rounded-lg pfp"></div></div>
       <div><h2 class="font-display text-2xl">Hi, I’m Aditya.</h2><p class="mt-1 text-subink">Navi Mumbai. Reading, moving, flute.</p></div>
     </div>
   </article>
@@ -71,7 +75,7 @@
       <li class="rounded-xl border border-stroke p-4">Reading now: <strong>Atomic Habits</strong> — James Clear</li>
       <li class="rounded-xl border border-stroke p-4">Workout: <strong>3 sessions</strong> this week</li>
       <li class="rounded-xl border border-stroke p-4">Flute focus: <strong>Raag Yaman — Alaap</strong> (BPM 84)</li>
-      <li class="rounded-xl border border-stroke p-4">City & time: <strong>Navi Mumbai</strong> · <span data-ist>--:-- IST</span></li>
+      <li class="rounded-xl border border-stroke p-4">Currently at: <strong>Navi Mumbai</strong> · <span data-ist>--:-- IST</span></li>
     </ul>
   </article>
   <article id="stats" class="rounded-2xl border border-stroke bg-surface p-6 shadow-card reveal">
@@ -84,26 +88,25 @@
   </article>
   <article id="bookshelf" class="rounded-2xl border border-stroke bg-surface p-6 shadow-card reveal"><h2 class="font-display text-2xl">Bookshelf</h2>
     <ul class="mt-4 grid gap-3 sm:grid-cols-2 text-sm text-ink/90">
-      <li class="rounded-xl border border-stroke p-4">Atomic Habits — James Clear</li>
-      <li class="rounded-xl border border-stroke p-4">Show Your Work — Austin Kleon</li>
+      <li class="rounded-xl border border-stroke p-4">The Daily Laws — Robert Greene</li>
+      <li class="rounded-xl border border-stroke p-4">Surrounded By Idiots — Thomas Erikson</li>
     </ul>
   </article>
   <article id="music" class="rounded-2xl border border-stroke bg-surface p-6 shadow-card reveal"><h2 class="font-display text-2xl">Music</h2>
     <div class="mt-3 grid gap-4 sm:grid-cols-2">
-      <div class="rounded-xl border border-stroke p-4"><p class="text-xs text-subink">Most listened song</p><p class="mt-1 font-display text-lg">Lose Yourself</p><p class="text-sm text-subink">Eminem</p></div>
-      <div class="rounded-xl border border-stroke p-4"><p class="text-xs text-subink">Favourite track</p><p class="mt-1 font-display text-lg">—</p><p class="text-sm text-subink">—</p></div>
+      <div class="rounded-xl border border-stroke p-4"><p class="text-xs text-subink">Most listened song</p><p class="mt-1 font-display text-lg">Wholeness</p><p class="text-sm text-subink">Sounds of Isha</p></div>
+      <div class="rounded-xl border border-stroke p-4"><p class="text-xs text-subink">Favourite Song</p><p class="mt-1 font-display text-lg">Gratitude at 432 Hz</p><p class="text-sm text-subink">Rakesh Chaurasia</p></div>
     </div>
   </article>
   <article id="toolbox" class="rounded-2xl border border-stroke bg-surface p-6 shadow-card reveal"><h2 class="font-display text-2xl">Toolbox</h2>
-    <div class="mt-3 flex flex-wrap gap-2 text-sm"><span class="chip">Notion</span><span class="chip">VS Code</span><span class="chip">Obsidian</span><span class="chip">Apple Music</span></div>
+    <div class="mt-3 flex flex-wrap gap-2 text-sm"><span class="chip">M1 Mac Mini</span><span class="chip">iPhone 13 Mini</span><span class="chip">Google Pixel 6a</span><span class="chip">AirPods Pro 2</span></div>
   </article>
 </section>
 </main>
 
   <footer class="border-t border-stroke/70 py-8 text-xs text-subink">
     <div class="mx-auto flex max-w-5xl items-center justify-between px-5">
-      <span>Made lightly.</span>
-      <span id="today"></span>
+      <span>Today's Date: <span id="today"></span></span>
     </div>
   </footer>
 

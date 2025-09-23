@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aditya Rao — Coming Soon</title>
+  <meta name="description" content="Aditya Rao — personal site. Coming soon." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            ink: '#0B1220', subink: '#5A6B85',
+            surface: '#FFFFFF', subtle: '#F7F9FC', stroke: '#E5EAF1',
+            blue: {50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',300:'#93C5FD',400:'#60A5FA',500:'#3B82F6',600:'#2563EB',700:'#1D4ED8'}
+          },
+          boxShadow: { card: '0 8px 28px rgba(11,18,32,0.06)' },
+          fontFamily: { sans:['Inter','system-ui','sans-serif'], display:['Space Grotesk','Inter','sans-serif'] },
+          keyframes: {
+            fadeUp: { '0%':{opacity:0,transform:'translateY(8px)'}, '100%':{opacity:1,transform:'none'} },
+            pulseLine: { '0%,100%':{ width:'10%' }, '50%':{ width:'70%' } }
+          },
+          animation: { fadeUp:'fadeUp .6s ease both', pulseLine:'pulseLine 2.4s ease-in-out infinite' }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root { --bg:#F7F9FC; }
+    body { background: var(--bg); }
+    .card { @apply rounded-2xl border border-stroke bg-surface shadow-card; }
+  </style>
+</head>
+<body class="text-ink antialiased">
+  <!-- Header -->
+  <header class="sticky top-0 z-20 border-b border-stroke/70 bg-white/80 backdrop-blur">
+    <nav class="mx-auto max-w-5xl px-5">
+      <div class="flex h-14 items-center gap-4">
+        <span class="font-display text-lg tracking-tight">Aditya Rao</span>
+        <span class="ml-auto text-xs text-subink">Building this space — softly.</span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main -->
+  <main class="mx-auto max-w-5xl px-5 py-10">
+    <!-- Hero -->
+    <section class="mb-8 animate-fadeUp">
+      <h1 class="font-display text-4xl leading-tight">Coming soon</h1>
+      <p class="mt-2 max-w-2xl text-subink">A quiet corner for notes, stats, and simple updates. Meanwhile, leave your email and I’ll nudge you when it’s live.</p>
+
+      <!-- Notify box -->
+      <div class="mt-6 grid gap-6 md:grid-cols-3">
+        <div class="md:col-span-2 rounded-2xl border border-stroke bg-surface p-6 shadow-card">
+          <label class="block text-sm text-subink">Get notified</label>
+          <div class="mt-2 flex gap-3">
+            <input id="email" type="email" placeholder="you@example.com" class="w-full rounded-xl border border-stroke bg-subtle/50 px-3 py-2 outline-none focus:border-blue-500" />
+            <button id="notify" class="rounded-xl bg-blue-600 px-4 py-2 text-white">Notify me</button>
+          </div>
+          <p class="mt-2 text-xs text-subink">No spam. One short note when things are ready.</p>
+          <div id="toast" class="pointer-events-none invisible mt-3 select-none rounded-xl border border-blue-200 bg-blue-50 px-3 py-2 text-sm text-blue-800 opacity-0 transition duration-300">Thanks! You’ll hear from me soon.</div>
+        </div>
+
+        <!-- Soft progress card -->
+        <div class="rounded-2xl border border-stroke bg-surface p-6 shadow-card">
+          <div class="flex items-center justify-between">
+            <span class="font-medium">Progress</span>
+            <span class="text-xs text-subink" id="eta">ETA: —</span>
+          </div>
+          <div class="mt-3 h-2 w-full rounded-full bg-stroke/80">
+            <span class="block h-2 rounded-full bg-blue-600" id="bar" style="width: 45%"></span>
+          </div>
+          <p class="mt-2 text-xs text-subink">Layouts, widgets, and the about page are shaping up.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Three cards in the same style as your screenshot -->
+    <section class="grid gap-6 md:grid-cols-3">
+      <div class="rounded-2xl border border-stroke bg-surface p-6 shadow-card">
+        <h2 class="font-display text-xl">What’s cooking</h2>
+        <ul class="mt-3 space-y-2 text-sm text-ink/90">
+          <li>• Home widgets for projects, book, song, goals</li>
+          <li>• Minimal feed with simple posts</li>
+          <li>• Stats: books, workout, flute minutes</li>
+        </ul>
+      </div>
+
+      <div class="rounded-2xl border border-stroke bg-surface p-6 shadow-card">
+        <h2 class="font-display text-xl">Current focus</h2>
+        <ul class="mt-3 space-y-2 text-sm text-ink/90">
+          <li>• About & contact polish</li>
+          <li>• Light theme details & motion</li>
+          <li>• Location widget with city outline</li>
+        </ul>
+      </div>
+
+      <div class="rounded-2xl border border-stroke bg-surface p-6 shadow-card">
+        <h2 class="font-display text-xl">Changelog</h2>
+        <ul class="mt-3 space-y-2 text-sm text-ink/90">
+          <li><span class="rounded-full bg-blue-100 px-2 py-0.5 text-xs text-blue-800">Today</span> • Contact layout & map widget</li>
+          <li>• About structure + cards</li>
+          <li>• Home wireframe</li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="border-t border-stroke/70 py-8 text-xs text-subink">
+    <div class="mx-auto flex max-w-5xl items-center justify-between px-5">
+      <span>Made lightly.</span>
+      <span id="today"></span>
+    </div>
+  </footer>
+
+  <script>
+    // Friendly fake ETA & progress pulse
+    const eta = document.getElementById('eta');
+    const bar = document.getElementById('bar');
+    const phases = [45, 52, 61, 68, 73, 80];
+    let i = 0; setInterval(()=>{ bar.style.width = phases[i%phases.length] + '%'; i++; }, 2200);
+    eta.textContent = 'ETA: soon-ish';
+
+    // Notify toast (no backend yet)
+    const btn = document.getElementById('notify');
+    const toast = document.getElementById('toast');
+    btn.addEventListener('click', ()=>{
+      toast.classList.remove('invisible','opacity-0');
+      setTimeout(()=>toast.classList.add('opacity-0'), 1800);
+      setTimeout(()=>toast.classList.add('invisible'), 2200);
+    });
+
+    // Footer date
+    document.getElementById('today').textContent = new Date().toISOString().slice(0,10);
+  </script>
+</body>
+</html>
