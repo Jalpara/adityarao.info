@@ -39,46 +39,11 @@
     .chip { border:1px solid #E5EAF1; padding:.35rem .75rem; border-radius:9999px; white-space:nowrap; }
     .progress { height:8px; background:#E5EAF1; border-radius:9999px; overflow:hidden; }
     .progress>span { display:block; height:100%; background:#2563EB; width:var(--val,0%); transition:width .6s ease; }
-    .navlink { color: #5A6B85; transition: color .2s ease; }
-    .navlink:hover { color: #0B1220; }
     @media (prefers-reduced-motion: reduce) { .reveal, .hover-lift, .tilt-oscillate { transition:none!important; animation:none!important; } }
   </style>
 </head>
-<body class="text-ink antialiased">
-  <header id="site-header" class="sticky top-0 z-20 border-b border-stroke/70 bg-white/80 backdrop-blur">
-    <nav class="mx-auto max-w-5xl px-5">
-      <div class="flex h-14 items-center gap-4">
-        <a href="index.html" class="font-display text-lg tracking-tight">Aditya Rao</a>
-        <div class="ml-auto flex items-center gap-5 text-sm">
-          <a href="index.html" class="navlink">Home</a>
-          <a href="about.html" class="navlink">About</a>
-          <a href="comingsoon.html" class="navlink">Blog</a>
-          <a href="creations.html" class="navlink">Creations</a>
-          <div class="relative dropdown">
-            <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown" class="navlink inline-flex items-center" type="button">
-              More 
-              <svg class="w-2.5 h-2.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
-              </svg>
-            </button>
-            <!-- Dropdown menu -->
-            <div id="dropdown" class="z-10 hidden bg-white divide-y divide-stroke rounded-lg shadow-card w-44 absolute right-0 mt-2 border border-stroke">
-              <ul class="py-2 text-sm text-ink" aria-labelledby="dropdownDefaultButton">
-                <li>
-                  <a href="now,someday.html" class="block px-4 py-2 hover:bg-subtle">Now, Someday</a>
-                </li>
-                <li>
-                  <span class="block px-4 py-2 text-subink bg-subtle">Needs and Wants</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <a href="contact.html" class="navlink">Contact</a>
-          <a href="contact.html#book" class="rounded-full bg-blue-600 px-3 py-1 text-white">Say hi</a>
-        </div>
-      </div>
-    </nav>
-  </header>
+<body class="text-ink antialiased" data-page="needs-wants">
+  <header data-component="site-header"></header>
 
 <main class="mx-auto max-w-5xl px-5 py-8">
   <div class="mb-8 rounded-2xl border border-stroke bg-surface p-6 shadow-card reveal">
@@ -161,60 +126,14 @@
   <div class="mt-8 rounded-2xl border border-stroke bg-surface p-6 text-center shadow-card reveal">
     <p class="text-subink italic">"The secret of happiness is not in doing what you want, but in wanting what you do."</p>
     <div class="mt-4 flex justify-center gap-3">
-      <a href="now,someday.html" class="rounded-full border border-stroke px-4 py-2 text-sm">View Now, Someday</a>
+      <a href="now-someday.html" class="rounded-full border border-stroke px-4 py-2 text-sm">View Now, Someday</a>
       <a href="contact.html" class="rounded-full bg-blue-600 px-4 py-2 text-sm text-white">Share Thoughts</a>
     </div>
   </div>
 </main>
 
-<footer class="border-t border-stroke/70 py-8 text-xs text-subink">
-  <div class="mx-auto flex max-w-5xl items-center justify-between px-5">
-    <span>Today's Date: <span id="today"></span></span>
-  </div>
-</footer>
+<footer data-component="site-footer" data-footer-note="Today's Date:" data-footer-date-placement="inline"></footer>
 
-<script>
-  const toReveal = Array.from(document.querySelectorAll('.reveal'));
-  const io = new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
-  }, { rootMargin:'0px 0px -10% 0px', threshold:0.12 });
-  toReveal.forEach((el,i)=>{ el.style.transitionDelay = `${Math.min(i*40,240)}ms`; io.observe(el); });
-
-  const headerEl = document.getElementById('site-header');
-  function onScroll(){ if(window.scrollY>4) headerEl.classList.add('scrolled'); else headerEl.classList.remove('scrolled'); }
-  onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
-
-  function tick(){
-    const today = new Date().toISOString().slice(0,10);
-    const td = document.getElementById('today'); if (td) td.textContent = today;
-  }
-  tick(); setInterval(tick, 60000);
-
-  // Dropdown functionality
-  document.addEventListener('DOMContentLoaded', function() {
-    const dropdownButton = document.getElementById('dropdownDefaultButton');
-    const dropdownMenu = document.getElementById('dropdown');
-
-    if (dropdownButton && dropdownMenu) {
-      dropdownButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        
-        if (dropdownMenu.classList.contains('hidden')) {
-          dropdownMenu.classList.remove('hidden');
-        } else {
-          dropdownMenu.classList.add('hidden');
-        }
-      });
-
-      // Close dropdown when clicking outside
-      document.addEventListener('click', function(e) {
-        if (!dropdownButton.contains(e.target) && !dropdownMenu.contains(e.target)) {
-          dropdownMenu.classList.add('hidden');
-        }
-      });
-    }
-  });
-</script>
+<script src="assets/js/site.js" defer></script>
 
 </body></html>
