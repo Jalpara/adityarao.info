@@ -5,81 +5,102 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <script src="assets/js/tailwind-config.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink: '#0B1220', subink: '#5A6B85',
-            surface: '#FFFFFF', subtle: '#F7F9FC', stroke: '#E5EAF1',
-            blue: {50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',300:'#93C5FD',400:'#60A5FA',500:'#3B82F6',600:'#2563EB',700:'#1D4ED8'}
-          },
-          boxShadow: { card: '0 4px 20px rgba(11,18,32,0.06)' },
-          fontFamily: { sans:['Inter','system-ui','sans-serif'], display:['Space Grotesk','Inter','sans-serif'] },
-        }
-      }
-    }
-  </script>
-  <style>
-    .pfp2 {
-      background: url(/assets/img/aditya-douji.jpg);
-      background-size: cover;
-      background-position: 30% 20%;
-    }
-    :root { --bg:#F7F9FC; }
-    body { background: var(--bg); }
-    header.scrolled { box-shadow: 0 6px 20px rgba(11,18,32,.06); }
-    .reveal { opacity:0; transform:translateY(8px); transition: opacity .6s ease, transform .6s ease; }
-    .reveal.in-view { opacity:1; transform:none; }
-    .hover-lift { transition: transform .25s ease, box-shadow .25s ease; }
-    .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(11,18,32,.08); }
-    .tilt-oscillate { animation: floatTilt 6s ease-in-out infinite; transform-origin:center; }
-    @keyframes floatTilt { 0%,100%{ transform: rotate(-2deg) translateY(0);} 50%{ transform: rotate(-1deg) translateY(-4px);} }
-    .chip { border:1px solid #E5EAF1; padding:.35rem .75rem; border-radius:9999px; white-space:nowrap; }
-    .progress { height:8px; background:#E5EAF1; border-radius:9999px; overflow:hidden; }
-    .progress>span { display:block; height:100%; background:#2563EB; width:var(--val,0%); transition:width .6s ease; }
-    @media (prefers-reduced-motion: reduce) { .reveal, .hover-lift, .tilt-oscillate { transition:none!important; animation:none!important; } }
-  </style>
 </head>
 <body class="text-ink antialiased" data-page="home">
   <header data-component="site-header"></header>
 
-<main class="mx-auto max-w-5xl px-5 py-8">
-<div class="mb-6 rounded-2xl border border-stroke bg-surface p-4 text-center text-sm text-subink shadow-card reveal">“Small steps every day.”</div>
-<section class="grid items-stretch gap-6 md:grid-cols-5">
-  <div class="rounded-2xl bg-surface p-6 shadow-card md:col-span-3 hover-lift reveal">
-    <h1 class="font-display text-3xl leading-tight">Fragments from my week: pages I'm reading, minutes I'm moving, and sounds I'm practicing.</h1>
-    <p class="mt-3 text-subink">I’m Aditya Rao from Navi Mumbai. This site is a quiet feed of small posts—books, workouts, flute, and whatever I'm noticing.</p>
-    <div class="mt-5 flex gap-3 text-sm">
-      <a href="comingsoon.html" class="rounded-full border border-stroke px-4 py-2">Read the Blog</a>
-      <a href="contact.html#book" class="rounded-full bg-blue-600 px-4 py-2 text-white">Say hi</a>
-    </div>
+<main class="mx-auto max-w-5xl px-5 py-10">
+  <div class="quote-card reveal" data-quote-of-day>
+    <p class="quote-card__text" data-quote-text>“Small steps every day.”</p>
+    <p class="quote-card__author" data-quote-author>— Unknown</p>
   </div>
-  <div class="grid gap-6 md:col-span-2">
-    <div class="rounded-2xl bg-surface p-3 shadow-card hover-lift reveal">
-      <div class="tilt-oscillate overflow-hidden rounded-xl border border-stroke bg-white"><div class="h-48 w-full pfp2"></div></div>
+
+  <section class="mt-8 grid items-stretch gap-6 md:grid-cols-5">
+    <div class="hero-card hover-lift reveal md:col-span-3">
+      <p class="eyebrow">Weekly fragments</p>
+      <h1 class="display-title mt-3">Fragments from my week: pages I’m reading, minutes I’m moving, and sounds I’m practicing.</h1>
+      <p class="mt-4 text-subink">I’m Aditya Rao from Navi Mumbai. This site is a quiet feed of small posts—books, workouts, flute, and whatever I’m noticing.</p>
+      <div class="mt-6 flex flex-wrap gap-3 text-sm">
+        <a href="comingsoon.html" class="btn btn--ghost">Read the blog</a>
+        <a href="contact.html#book" class="btn btn--primary">Say hi</a>
+      </div>
     </div>
-    <div class="rounded-2xl bg-surface p-5 shadow-card hover-lift reveal">
-      <p class="text-sm text-subink">Currently in</p>
-      <p class="mt-1 font-display text-xl">Navi Mumbai</p>
-      <div class="mt-3 flex items-center gap-4 text-sm text-subink"><span data-ist>🕒 --:-- IST</span><span>•</span><span id="weather-home">☁︎ —°C</span></div>
+    <div class="grid gap-6 md:col-span-2">
+      <div class="hover-lift reveal rounded-2xl border border-stroke bg-white/80 p-3 shadow-card">
+        <div class="tilt-oscillate overflow-hidden rounded-2xl border border-stroke bg-white/90">
+          <div class="h-48 w-full pfp2"></div>
+        </div>
+      </div>
+      <div class="hover-lift reveal rounded-2xl border border-stroke bg-white/80 p-5 shadow-card">
+        <p class="text-xs uppercase tracking-[0.2em] text-subink">Currently in</p>
+        <p class="mt-2 font-display text-2xl">Navi Mumbai</p>
+        <div class="mt-4 flex items-center gap-4 text-sm text-subink">
+          <span data-ist>🕒 --:-- IST</span>
+          <span>•</span>
+          <span id="weather-home">☁︎ —°C</span>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
-<section class="mt-8 grid gap-6 md:grid-cols-3">
-  <div class="md:col-span-2 rounded-2xl border border-stroke bg-surface p-5 shadow-card hover-lift reveal">
-    <div class="mb-2 flex items-end justify-between"><h2 class="font-display text-2xl">Featured projects</h2><a href="creations.html" class="text-sm text-blue-700">View all →</a></div>
-    <div class="grid mt-5 gap-4 sm:grid-cols-2">
-      <article class="rounded-xl border border-stroke p-4 hover-lift reveal"><div class="h-28 w-full rounded-md bg-[linear-gradient(135deg,#e5e7eb,#dbeafe)]"></div><h3 class="mt-3 font-medium">Cindral</h3><p class="text-sm text-subink">Short one-liner about the outcome.</p></article>
-      <article class="rounded-xl border border-stroke p-4 hover-lift reveal"><div class="h-28 w-full rounded-md bg-[linear-gradient(135deg,#e5e7eb,#bfdbfe)]"></div><h3 class="mt-3 font-medium">MrVibe</h3><p class="text-sm text-subink">A concise explanation of impact.</p></article>
+  </section>
+
+  <section class="mt-12 grid gap-6 md:grid-cols-3">
+    <div class="hover-lift reveal rounded-3xl border border-stroke bg-white/85 p-6 shadow-card md:col-span-2">
+      <div class="flex items-end justify-between gap-3">
+        <h2 class="section-title">Featured projects</h2>
+        <a href="creations.html" class="text-sm text-blue-700 transition-colors duration-300 hover:text-blue-800">View all →</a>
+      </div>
+      <div class="mt-6 grid gap-4 sm:grid-cols-2">
+        <article class="hover-lift reveal rounded-2xl border border-stroke/80 bg-white/90 p-4 shadow-card">
+          <div class="h-28 w-full rounded-xl bg-[linear-gradient(135deg,rgba(203,213,225,0.5),rgba(191,219,254,0.8))]"></div>
+          <h3 class="mt-3 font-medium text-ink">Cindral</h3>
+          <p class="text-sm text-subink">Simplifying supply insights for boutique retailers.</p>
+        </article>
+        <article class="hover-lift reveal rounded-2xl border border-stroke/80 bg-white/90 p-4 shadow-card">
+          <div class="h-28 w-full rounded-xl bg-[linear-gradient(135deg,rgba(229,231,235,0.5),rgba(96,165,250,0.7))]"></div>
+          <h3 class="mt-3 font-medium text-ink">MrVibe</h3>
+          <p class="text-sm text-subink">Designing playful live experiences for indie artists.</p>
+        </article>
+      </div>
     </div>
-  </div>
-  <div class="rounded-2xl border border-stroke bg-surface p-5 shadow-card hover-lift reveal"><p class="text-sm text-subink">Favourite book</p><div class="h-36 mt-4 mb-4 w-full rounded-md bg-[linear-gradient(135deg,#e5e7eb,#bfdbfe)]"></div><h3 class="mt-1 font-display text-xl">The Daily Laws</h3><p class="text-subink">Robert Greene</p><a href="about.html#bookshelf" class="mt-3 inline-block text-sm text-blue-700">See Bookshelf →</a></div>
-  <div class="rounded-2xl border border-stroke bg-surface p-5 shadow-card hover-lift reveal"><p class="text-sm text-subink">Most listening song</p><h3 class="mt-1 font-display text-xl">Wholeness</h3><p class="text-subink">Sounds of Isha</p><a href="about.html#music" class="mt-3 inline-block text-sm text-blue-700">See Music →</a></div>
-  <div class="rounded-2xl border border-stroke bg-surface p-5 shadow-card hover-lift reveal"><p class="text-sm text-subink">Workout stats (this week)</p><div class="mt-2 flex items-baseline gap-4"><div><div class="text-2xl font-display">140</div><div class="text-xs text-subink">minutes</div></div><div><div class="text-2xl font-display">3</div><div class="text-xs text-subink">sessions</div></div></div><a href="about.html#activities" class="mt-3 inline-block text-sm text-blue-700">See Activities →</a></div>
-  <div class="rounded-2xl border border-stroke bg-surface p-5 shadow-card hover-lift reveal"><p class="text-sm text-subink">Goals</p><ul class="mt-2 list-disc pl-5 text-sm leading-7"><li>Read 20 minutes daily</li><li>Train 3x per week</li><li>Flute — steady tone @ 90 BPM</li></ul></div>
-</section>
+    <div class="hover-lift reveal rounded-3xl border border-stroke bg-white/85 p-6 shadow-card">
+      <p class="eyebrow">Favourite book</p>
+      <div class="mt-4 mb-5 h-36 w-full rounded-xl bg-[linear-gradient(135deg,rgba(226,232,240,0.5),rgba(191,219,254,0.85))]"></div>
+      <h3 class="font-display text-xl">The Daily Laws</h3>
+      <p class="text-subink">Robert Greene</p>
+      <a href="about.html#bookshelf" class="mt-4 inline-block text-sm text-blue-700 transition-colors duration-300 hover:text-blue-800">See Bookshelf →</a>
+    </div>
+    <div class="hover-lift reveal rounded-3xl border border-stroke bg-white/85 p-6 shadow-card">
+      <p class="eyebrow">On repeat</p>
+      <h3 class="mt-4 font-display text-xl">Wholeness</h3>
+      <p class="text-subink">Sounds of Isha</p>
+      <a href="about.html#music" class="mt-4 inline-block text-sm text-blue-700 transition-colors duration-300 hover:text-blue-800">See Music →</a>
+    </div>
+    <div class="hover-lift reveal rounded-3xl border border-stroke bg-white/85 p-6 shadow-card">
+      <p class="eyebrow">Workout stats</p>
+      <div class="mt-3 flex items-baseline gap-4">
+        <div>
+          <div class="font-display text-3xl">140</div>
+          <div class="text-xs uppercase tracking-wide text-subink">minutes</div>
+        </div>
+        <div>
+          <div class="font-display text-3xl">3</div>
+          <div class="text-xs uppercase tracking-wide text-subink">sessions</div>
+        </div>
+      </div>
+      <a href="about.html#activities" class="mt-4 inline-block text-sm text-blue-700 transition-colors duration-300 hover:text-blue-800">See Activities →</a>
+    </div>
+    <div class="hover-lift reveal rounded-3xl border border-stroke bg-white/85 p-6 shadow-card">
+      <p class="eyebrow">Goals</p>
+      <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-7">
+        <li>Read 20 minutes daily</li>
+        <li>Train 3× per week</li>
+        <li>Flute — steady tone @ 90 BPM</li>
+      </ul>
+    </div>
+  </section>
 </main>
 
   <footer data-component="site-footer" data-footer-note="Today's Date:" data-footer-date-placement="inline"></footer>
