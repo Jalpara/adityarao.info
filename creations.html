@@ -37,22 +37,8 @@
     @media (prefers-reduced-motion: reduce) { .reveal, .hover-lift, .tilt-oscillate { transition:none!important; animation:none!important; } }
   </style>
 </head>
-<body class="text-ink antialiased">
-  <header id="site-header" class="sticky top-0 z-20 border-b border-stroke/70 bg-white/80 backdrop-blur">
-    <nav class="mx-auto max-w-5xl px-5">
-      <div class="flex h-14 items-center gap-4">
-        <a href="index.html" class="font-display text-lg tracking-tight">Aditya Rao</a>
-        <div class="ml-auto flex items-center gap-5 text-sm">
-          <a href="index.html" class="navlink">Home</a>
-          <a href="about.html" class="navlink">About</a>
-          <a href="comingsoon.html" class="navlink">Blog</a>
-          <span class="text-subink">Creations</span>
-          <a href="contact.html" class="navlink">Contact</a>
-          <a href="contact.html#book" class="rounded-full bg-blue-600 px-3 py-1 text-white">Say hi</a>
-        </div>
-      </div>
-    </nav>
-  </header>
+<body class="text-ink antialiased" data-page="creations">
+  <header data-component="site-header"></header>
 
 <main class="mx-auto max-w-5xl px-5 py-10">
 <header class="mb-6"><h1 class="font-display text-4xl leading-tight">Creations</h1><p class="text-subink">Here are some of the things I’ve been creating.</p></header>
@@ -64,46 +50,7 @@
 </div>
 </main>
 
-  <footer class="border-t border-stroke/70 py-8 text-xs text-subink">
-    <div class="mx-auto flex max-w-5xl items-center justify-between px-5">
-      <span>Today's Date: <span id="today"></span></span>
-    </div>
-  </footer>
+  <footer data-component="site-footer" data-footer-note="Today's Date:" data-footer-date-placement="inline"></footer>
 
-  <script>
-    const toReveal = Array.from(document.querySelectorAll('.reveal'));
-    const io = new IntersectionObserver((entries)=>{
-      entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); } });
-    }, { rootMargin:'0px 0px -10% 0px', threshold:0.12 });
-    toReveal.forEach((el,i)=>{ el.style.transitionDelay = `${Math.min(i*40,240)}ms`; io.observe(el); });
-
-    const headerEl = document.getElementById('site-header');
-    function onScroll(){ if(window.scrollY>4) headerEl.classList.add('scrolled'); else headerEl.classList.remove('scrolled'); }
-    onScroll(); window.addEventListener('scroll', onScroll, { passive:true });
-
-    function istTime(){ try { return new Intl.DateTimeFormat('en-IN', { timeStyle:'short', timeZone:'Asia/Kolkata' }).format(new Date()); } catch { return '--:--'; } }
-    function tick(){
-      const t = istTime();
-      document.querySelectorAll('[data-ist]').forEach(el=> el.textContent = `🕒 ${t} IST`);
-      const today = new Date().toISOString().slice(0,10);
-      const td = document.getElementById('today'); if (td) td.textContent = today;
-    }
-    tick(); setInterval(tick, 60000);
-
-    const copyBtn = document.getElementById('copy-email');
-    const emailLink = document.getElementById('email-link');
-    if (copyBtn && emailLink) copyBtn.addEventListener('click', async (e)=>{
-      e.preventDefault();
-      try { await navigator.clipboard.writeText(emailLink.textContent.trim()); copyBtn.textContent='Copied ✓'; setTimeout(()=>copyBtn.textContent='Copy',1500); } catch {}
-    });
-
-    const setBtn = document.getElementById('set-weather');
-    const weatherEl = document.getElementById('weather');
-    if (setBtn && weatherEl) setBtn.addEventListener('click', ()=>{
-      const temp = prompt('Temperature in °C (e.g., 29)');
-      const cond = prompt('Condition (e.g., Cloudy, Clear, Rain)');
-      if (temp) weatherEl.textContent = `${cond ? cond+' ' : ''}${temp}°C`;
-    });
-  </script>
-
+  <script src="assets/js/site.js" defer></script>
 </body></html>
