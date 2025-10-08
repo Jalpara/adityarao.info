@@ -5,42 +5,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/theme.css">
+  <script src="assets/js/tailwind-config.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            ink: '#0B1220', subink: '#5A6B85',
-            surface: '#FFFFFF', subtle: '#F7F9FC', stroke: '#E5EAF1',
-            blue: {50:'#EFF6FF',100:'#DBEAFE',200:'#BFDBFE',300:'#93C5FD',400:'#60A5FA',500:'#3B82F6',600:'#2563EB',700:'#1D4ED8'}
-          },
-          boxShadow: { card: '0 4px 20px rgba(11,18,32,0.06)' },
-          fontFamily: { sans:['Inter','system-ui','sans-serif'], display:['Space Grotesk','Inter','sans-serif'] },
-        }
-      }
-    }
-  </script>
-  <style>
-    .pfp2 {
-      background: url(/assets/img/aditya-douji.jpg);
-      background-size: cover;
-      background-position: 30% 20%;
-    }
-    :root { --bg:#F7F9FC; }
-    body { background: var(--bg); }
-    header.scrolled { box-shadow: 0 6px 20px rgba(11,18,32,.06); }
-    .reveal { opacity:0; transform:translateY(8px); transition: opacity .6s ease, transform .6s ease; }
-    .reveal.in-view { opacity:1; transform:none; }
-    .hover-lift { transition: transform .25s ease, box-shadow .25s ease; }
-    .hover-lift:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(11,18,32,.08); }
-    .tilt-oscillate { animation: floatTilt 6s ease-in-out infinite; transform-origin:center; }
-    @keyframes floatTilt { 0%,100%{ transform: rotate(-2deg) translateY(0);} 50%{ transform: rotate(-1deg) translateY(-4px);} }
-    .chip { border:1px solid #E5EAF1; padding:.35rem .75rem; border-radius:9999px; white-space:nowrap; }
-    .progress { height:8px; background:#E5EAF1; border-radius:9999px; overflow:hidden; }
-    .progress>span { display:block; height:100%; background:#2563EB; width:var(--val,0%); transition:width .6s ease; }
-    @media (prefers-reduced-motion: reduce) { .reveal, .hover-lift, .tilt-oscillate { transition:none!important; animation:none!important; } }
-  </style>
 </head>
 <body class="text-ink antialiased" data-page="home">
   <header data-component="site-header"></header>
