@@ -410,6 +410,7 @@ function initPageTransitions() {
 
   const markReady = () => {
     requestAnimationFrame(() => {
+      document.body.classList.remove('is-page-exiting');
       document.body.classList.add('is-page-ready');
     });
   };
@@ -436,14 +437,15 @@ function initPageTransitions() {
     if (link.target && link.target !== '_self') return;
     if (!isInternal(link)) return;
 
-    event.preventDefault();
     const destination = link.href;
     if (destination === window.location.href) return;
+
+    event.preventDefault();
 
     document.body.classList.add('is-page-exiting');
     setTimeout(() => {
       window.location.href = destination;
-    }, 240);
+    }, 360);
   });
 }
 

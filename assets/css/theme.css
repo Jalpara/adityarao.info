@@ -265,6 +265,11 @@ header.scrolled {
 html.has-js body {
   opacity: 0;
   transform: translateY(24px);
+  transition:
+    opacity var(--motion-duration-md) var(--motion-ease-out),
+    transform var(--motion-duration-md) var(--motion-ease-out),
+    background var(--motion-duration-lg) var(--motion-ease-in-out),
+    color var(--motion-duration-md) var(--motion-ease-standard);
 }
 
 html.has-js body.is-page-ready {
@@ -275,6 +280,16 @@ html.has-js body.is-page-ready {
 html.has-js body.is-page-exiting {
   opacity: 0;
   transform: translateY(-12px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.has-js body,
+  html.has-js body.is-page-ready,
+  html.has-js body.is-page-exiting {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
 }
 
 .reveal {
