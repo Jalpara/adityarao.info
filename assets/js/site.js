@@ -9,6 +9,7 @@ const NAV_LINKS = [
 ];
 
 const MORE_LINKS = [
+  { id: 'brand-assets', label: 'Brand Assets', href: 'brand-assets.html' },
   { id: 'needs-wants', label: 'Needs & Wants', href: 'needs-wants.html' },
   { id: 'now-someday', label: 'Now & Someday', href: 'now-someday.html' }
 ];
@@ -89,13 +90,45 @@ function renderHeader(currentPage) {
     renderNavItem(NAV_LINKS[4])
   ].join('');
 
+  const renderMobileNavLink = (item) => {
+    if (item.id === currentPage) {
+      return `<span aria-current="page">${item.label}</span>`;
+    }
+    return `<a href="${item.href}">${item.label}</a>`;
+  };
+
+  const mobilePrimaryLinks = NAV_LINKS.map((item) => `<li>${renderMobileNavLink(item)}</li>`).join('');
+  const mobileMoreLinks = MORE_LINKS.map((item) => `<li>${renderMobileNavLink(item)}</li>`).join('');
+
   mount.innerHTML = `
     <nav class="mx-auto max-w-5xl px-5">
-      <div class="flex h-16 items-center gap-6 text-sm">
+      <div class="flex h-16 items-center gap-4 text-sm">
         <a href="index.html" class="font-display text-lg tracking-tight text-ink">Aditya Rao</a>
-        <div class="ml-auto flex items-center gap-6">
+        <button type="button" class="nav-toggle ml-auto md:hidden" data-nav-toggle aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+          <span class="nav-toggle__bar"></span>
+        </button>
+        <div class="ml-auto hidden items-center gap-6 md:flex">
           ${navItemsHtml}
           <a href="${CTA_LINK.href}" class="btn btn--primary text-sm" data-skip-transition>${CTA_LINK.label}</a>
+        </div>
+      </div>
+      <div class="mobile-nav md:hidden" id="mobile-nav" data-mobile-panel hidden>
+        <div class="mobile-nav__panel">
+          <div class="mobile-nav__section">
+            <p class="mobile-nav__heading">Navigate</p>
+            <ul class="mobile-nav__list">
+              ${mobilePrimaryLinks}
+            </ul>
+          </div>
+          <div class="mobile-nav__section">
+            <p class="mobile-nav__heading">More</p>
+            <ul class="mobile-nav__list">
+              ${mobileMoreLinks}
+            </ul>
+          </div>
+          <a href="${CTA_LINK.href}" class="btn btn--primary mobile-nav__cta" data-mobile-close="true" data-skip-transition>${CTA_LINK.label}</a>
         </div>
       </div>
     </nav>
@@ -173,6 +206,111 @@ function setupNavMenu() {
       button.setAttribute('aria-expanded', 'false');
     }
   });
+}
+
+function setupMobileNav() {
+  const header = document.getElementById('site-header');
+  if (!header) return;
+
+  const toggle = header.querySelector('[data-nav-toggle]');
+  const panel = header.querySelector('[data-mobile-panel]');
+  if (!toggle || !panel) return;
+
+  let hideTimeout;
+
+  const openPanel = () => {
+    if (hideTimeout) {
+      clearTimeout(hideTimeout);
+      hideTimeout = undefined;
+    }
+    panel.hidden = false;
+    requestAnimationFrame(() => {
+      panel.classList.add('is-open');
+      toggle.classList.add('is-active');
+      toggle.setAttribute('aria-expanded', 'true');
+    });
+  };
+
+  const closePanel = () => {
+    if (!panel.classList.contains('is-open') && panel.hidden) {
+      toggle.setAttribute('aria-expanded', 'false');
+      return;
+    }
+    if (hideTimeout) {
+      clearTimeout(hideTimeout);
+      hideTimeout = undefined;
+    }
+    panel.classList.remove('is-open');
+    toggle.classList.remove('is-active');
+    toggle.setAttribute('aria-expanded', 'false');
+    hideTimeout = window.setTimeout(() => {
+      if (!panel.classList.contains('is-open')) {
+        panel.hidden = true;
+      }
+      hideTimeout = undefined;
+    }, 260);
+  };
+
+  toggle.addEventListener('click', () => {
+    const isOpen = panel.classList.contains('is-open');
+    if (isOpen) {
+      closePanel();
+    } else {
+      openPanel();
+    }
+  });
+
+  panel.addEventListener('click', (event) => {
+    if (event.target.dataset.mobileClose === 'true') {
+      closePanel();
+      return;
+    }
+
+    const link = event.target.closest('a[href]');
+    if (link) {
+      closePanel();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!panel.classList.contains('is-open')) {
+      return;
+    }
+
+    const targetInsideHeader = header.contains(event.target);
+    if (!targetInsideHeader) {
+      closePanel();
+      return;
+    }
+
+    if (panel.contains(event.target)) {
+      return;
+    }
+
+    if (toggle.contains(event.target)) {
+      return;
+    }
+
+    closePanel();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && panel.classList.contains('is-open')) {
+      closePanel();
+    }
+  });
+
+  const mq = window.matchMedia('(min-width: 768px)');
+  const handleMqChange = (event) => {
+    if (event.matches) {
+      closePanel();
+    }
+  };
+  if (typeof mq.addEventListener === 'function') {
+    mq.addEventListener('change', handleMqChange);
+  } else if (typeof mq.addListener === 'function') {
+    mq.addListener(handleMqChange);
+  }
 }
 
 function initReveal() {
@@ -272,6 +410,7 @@ function initPageTransitions() {
 
   const markReady = () => {
     requestAnimationFrame(() => {
+      document.body.classList.remove('is-page-exiting');
       document.body.classList.add('is-page-ready');
     });
   };
@@ -298,14 +437,15 @@ function initPageTransitions() {
     if (link.target && link.target !== '_self') return;
     if (!isInternal(link)) return;
 
-    event.preventDefault();
     const destination = link.href;
     if (destination === window.location.href) return;
+
+    event.preventDefault();
 
     document.body.classList.add('is-page-exiting');
     setTimeout(() => {
       window.location.href = destination;
-    }, 240);
+    }, 360);
   });
 }
 
@@ -345,6 +485,7 @@ function initWeatherSetter() {
   initPageTransitions();
   renderHeader(page || '');
   renderFooter();
+  setupMobileNav();
   setupNavMenu();
   initReveal();
   initHeaderScroll();
