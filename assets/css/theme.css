@@ -32,6 +32,37 @@
   --blue-600: #2563eb;
   --blue-600-rgb: 37 99 235;
   --blue-700: #1d4ed8;
+  --ink: #0B1220;
+  --ink-rgb: 11 18 32;
+  --ink-subtle: #5A6B85;
+  --ink-subtle-rgb: 90 107 133;
+  --surface: #FFFFFF;
+  --surface-rgb: 255 255 255;
+  --surface-subtle: #F7F9FC;
+  --surface-subtle-rgb: 247 249 252;
+  --surface-strong: #EEF3FA;
+  --surface-strong-rgb: 238 243 250;
+  --stroke: #E5EAF1;
+  --stroke-rgb: 229 234 241;
+  --shadow-card: 0 4px 20px rgba(11, 18, 32, 0.06);
+  --shadow-lift: 0 10px 30px rgba(11, 18, 32, 0.08);
+
+  /* Accent blues */
+  --blue-50: #EFF6FF;
+  --blue-50-rgb: 239 246 255;
+  --blue-100: #DBEAFE;
+  --blue-100-rgb: 219 234 254;
+  --blue-200: #BFDBFE;
+  --blue-200-rgb: 191 219 254;
+  --blue-300: #93C5FD;
+  --blue-300-rgb: 147 197 253;
+  --blue-400: #60A5FA;
+  --blue-400-rgb: 96 165 250;
+  --blue-500: #3B82F6;
+  --blue-500-rgb: 59 130 246;
+  --blue-600: #2563EB;
+  --blue-600-rgb: 37 99 235;
+  --blue-700: #1D4ED8;
   --blue-700-rgb: 29 78 216;
 
   /* Radius scale */
@@ -46,6 +77,9 @@
 
   /* Motion tokens */
   --motion-duration-xs: 0.18s;
+  --radius-pill: 9999px;
+
+  /* Motion tokens */
   --motion-duration-sm: 0.25s;
   --motion-duration-md: 0.4s;
   --motion-duration-lg: 0.6s;
@@ -118,6 +152,24 @@ html.has-js body {
 html.has-js body.is-page-ready {
   opacity: 1;
   transform: none;
+  --motion-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-out: cubic-bezier(0.2, 0, 0, 1);
+  --motion-ease-in-out: ease-in-out;
+  --motion-translate-distance: 8px;
+}
+
+body {
+  background: var(--surface-subtle);
+  color: var(--ink);
+}
+
+header.scrolled {
+  box-shadow: 0 6px 20px rgba(11, 18, 32, 0.06);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(var(--motion-translate-distance));
   transition: opacity var(--motion-duration-lg) var(--motion-ease-standard),
     transform var(--motion-duration-lg) var(--motion-ease-standard);
 }
@@ -256,6 +308,9 @@ li {
 .btn--primary:hover {
   box-shadow: 0 18px 40px rgba(var(--blue-500-rgb) / 0.28);
   transform: translateY(-1px);
+.reveal.in-view {
+  opacity: 1;
+  transform: none;
 }
 
 .hover-lift {
@@ -280,6 +335,12 @@ li {
 .reveal.in-view {
   opacity: 1;
   transform: none;
+    box-shadow var(--motion-duration-sm) var(--motion-ease-out);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lift);
 }
 
 .tilt-oscillate {
@@ -317,6 +378,14 @@ li {
 .progress {
   height: 0.5rem;
   background: rgba(var(--stroke-rgb) / 1);
+  border: 1px solid var(--stroke);
+  font-size: 0.8125rem;
+  white-space: nowrap;
+}
+
+.progress {
+  height: 8px;
+  background: var(--stroke);
   border-radius: var(--radius-pill);
   overflow: hidden;
 }
@@ -325,6 +394,7 @@ li {
   display: block;
   height: 100%;
   background: rgb(var(--blue-600-rgb) / 1);
+  background: var(--blue-600);
   width: var(--val, 0%);
   transition: width var(--motion-duration-lg) var(--motion-ease-standard);
 }
@@ -377,6 +447,7 @@ li {
 @media (prefers-reduced-motion: reduce) {
   html,
   body,
+@media (prefers-reduced-motion: reduce) {
   .reveal,
   .hover-lift,
   .tilt-oscillate {
