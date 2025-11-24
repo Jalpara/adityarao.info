@@ -1,109 +1,13 @@
-<!doctype html><html lang="en"><head><title>Aditya Rao — Home</title>
-<meta name="description" content="Home — widgets for projects, book, song, workout, goals, quote." />
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/theme.css">
-  <script src="assets/js/tailwind-config.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="text-ink antialiased" data-page="home">
-  <header data-component="site-header"></header>
-
-<main class="mx-auto max-w-5xl px-5 py-10">
-  <div class="quote-card reveal" data-quote-of-day>
-    <p class="quote-card__text" data-quote-text>“Small steps every day.”</p>
-    <p class="quote-card__author" data-quote-author>— Unknown</p>
-  </div>
-
-  <section class="mt-8 grid items-stretch gap-6 md:grid-cols-5">
-    <div class="hero-card hover-lift reveal md:col-span-3">
-      <p class="eyebrow">Weekly fragments</p>
-      <h1 class="display-title mt-3">Fragments from my week: pages I’m reading, minutes I’m moving, and sounds I’m practicing.</h1>
-      <p class="mt-4 text-subink">I’m Aditya Rao from Navi Mumbai. This site is a quiet feed of small posts—books, workouts, flute, and whatever I’m noticing.</p>
-      <div class="mt-6 flex flex-wrap gap-3 text-sm">
-        <a href="comingsoon.html" class="btn btn--ghost">Read the blog</a>
-        <a href="contact.html#book" class="btn btn--primary">Say hi</a>
-      </div>
-    </div>
-    <div class="grid gap-6 md:col-span-2">
-      <div class="hover-lift reveal rounded-2xl border border-stroke bg-white/80 p-3 shadow-card">
-        <div class="tilt-oscillate overflow-hidden rounded-2xl border border-stroke bg-white/90">
-          <div class="h-48 w-full pfp2"></div>
-        </div>
-      </div>
-      <div class="hover-lift reveal rounded-2xl border border-stroke bg-white/80 p-5 shadow-card">
-        <p class="text-xs uppercase tracking-[0.2em] text-subink">Currently in</p>
-        <p class="mt-2 font-display text-2xl">Navi Mumbai</p>
-        <div class="mt-4 flex items-center gap-4 text-sm text-subink">
-          <span data-ist>🕒 --:-- IST</span>
-          <span>•</span>
-          <span id="weather-home">☁︎ —°C</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="mt-12 grid gap-6 md:grid-cols-3">
-    <div class="hover-lift reveal rounded-3xl border border-stroke bg-white/85 p-6 shadow-card md:col-span-2">
-      <div class="flex items-end justify-between gap-3">
-        <h2 class="section-title">Featured projects</h2>
-        <a href="creations.html" class="text-sm text-blue-700 transition-colors duration-300 hover:text-blue-800">View all →</a>
-      </div>
-      <div class="mt-6 grid gap-4 sm:grid-cols-2">
-        <article class="hover-lift reveal rounded-2xl border border-stroke/80 bg-white/90 p-4 shadow-card">
-          <div class="h-28 w-full rounded-xl bg-[linear-gradient(135deg,rgba(203,213,225,0.5),rgba(191,219,254,0.8))]"></div>
-          <h3 class="mt-3 font-medium text-ink">Cindral</h3>
-          <p class="text-sm text-subink">Simplifying supply insights for boutique retailers.</p>
-        </article>
-        <article class="hover-lift reveal rounded-2xl border border-stroke/80 bg-white/90 p-4 shadow-card">
-          <div class="h-28 w-full rounded-xl bg-[linear-gradient(135deg,rgba(229,231,235,0.5),rgba(96,165,250,0.7))]"></div>
-          <h3 class="mt-3 font-medium text-ink">MrVibe</h3>
-          <p class="text-sm text-subink">Designing playful live experiences for indie artists.</p>
-        </article>
-      </div>
-    </div>
-    <div class="hover-lift reveal rounded-3xl border border-stroke bg-white/85 p-6 shadow-card">
-      <p class="eyebrow">Favourite book</p>
-      <div class="mt-4 mb-5 h-36 w-full rounded-xl bg-[linear-gradient(135deg,rgba(226,232,240,0.5),rgba(191,219,254,0.85))]"></div>
-      <h3 class="font-display text-xl">The Daily Laws</h3>
-      <p class="text-subink">Robert Greene</p>
-      <a href="about.html#bookshelf" class="mt-4 inline-block text-sm text-blue-700 transition-colors duration-300 hover:text-blue-800">See Bookshelf →</a>
-    </div>
-    <div class="hover-lift reveal rounded-3xl border border-stroke bg-white/85 p-6 shadow-card">
-      <p class="eyebrow">On repeat</p>
-      <h3 class="mt-4 font-display text-xl">Wholeness</h3>
-      <p class="text-subink">Sounds of Isha</p>
-      <a href="about.html#music" class="mt-4 inline-block text-sm text-blue-700 transition-colors duration-300 hover:text-blue-800">See Music →</a>
-    </div>
-    <div class="hover-lift reveal rounded-3xl border border-stroke bg-white/85 p-6 shadow-card">
-      <p class="eyebrow">Workout stats</p>
-      <div class="mt-3 flex items-baseline gap-4">
-        <div>
-          <div class="font-display text-3xl">140</div>
-          <div class="text-xs uppercase tracking-wide text-subink">minutes</div>
-        </div>
-        <div>
-          <div class="font-display text-3xl">3</div>
-          <div class="text-xs uppercase tracking-wide text-subink">sessions</div>
-        </div>
-      </div>
-      <a href="about.html#activities" class="mt-4 inline-block text-sm text-blue-700 transition-colors duration-300 hover:text-blue-800">See Activities →</a>
-    </div>
-    <div class="hover-lift reveal rounded-3xl border border-stroke bg-white/85 p-6 shadow-card">
-      <p class="eyebrow">Goals</p>
-      <ul class="mt-3 list-disc space-y-2 pl-5 text-sm leading-7">
-        <li>Read 20 minutes daily</li>
-        <li>Train 3× per week</li>
-        <li>Flute — steady tone @ 90 BPM</li>
-      </ul>
-    </div>
-  </section>
-</main>
-
-  <footer data-component="site-footer" data-footer-note="Today's Date:" data-footer-date-placement="inline"></footer>
-
-  <script src="assets/js/site.js" defer></script>
-</body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>adityarao.info</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
