@@ -22,7 +22,7 @@ const Loader = ({ onComplete }) => {
 
         const timer = setTimeout(() => {
             onComplete();
-        }, 2500); // Show loader for 2.5 seconds
+        }, 2500);
 
         return () => clearTimeout(timer);
     }, [onComplete]);
@@ -31,7 +31,7 @@ const Loader = ({ onComplete }) => {
         <motion.div
             className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#f5f5f5] text-black"
             initial={{ y: 0 }}
-            exit={{ y: "-100%", transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
+            exit={{ y: "-100%", transition: { duration: 1.2, ease: [0.76, 0, 0.24, 1] } }}
         >
             <div className="max-w-xl px-6 text-center space-y-8">
                 <motion.p

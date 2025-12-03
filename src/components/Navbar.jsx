@@ -13,7 +13,7 @@ export default function Navbar() {
   );
 
   const getLinkClass = ({ isActive }) =>
-    `px-4 py-1.5 rounded-full ${isActive ? "bg-[#2e2e2e] text-white" : "text-black/70 hover:bg-black/5"
+    `px-4 py-1.5 rounded-full transition ${isActive ? "bg-[#2e2e2e] text-white" : "text-black/70 hover:bg-black/5"
     }`;
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -102,8 +102,8 @@ export default function Navbar() {
             to="/now"
             className={({ isActive }) =>
               `px-4 py-1.5 rounded-full font-bold ${isActive
-                ? "text-white bg-gradient-to-b from-[#F96282] to-[#9A59CE]"
-                : "text-transparent bg-clip-text bg-gradient-to-b from-[#F96282] to-[#9A59CE]"
+                ? "text-white bg-linear-to-b from-[#F96282] to-[#9A59CE]"
+                : "text-transparent bg-clip-text bg-linear-to-b from-[#F96282] to-[#9A59CE]"
               }`
             }
           >

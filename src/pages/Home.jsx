@@ -144,7 +144,7 @@ const Home = () => {
 
           {/* CTA */}
           <div className="flex flex-col sm:flex-row gap-4 mt-6 tracking-tight justify-center md:justify-start">
-            <NavLink className="bg-[#2e2e2e] text-white/90 px-6 py-3 rounded-xl text-lg hover:bg-black/10 hover:text-black/90 hover:border-black/10 border transition">
+            <NavLink to='/about' className="bg-[#2e2e2e] text-white/90 px-6 py-3 rounded-xl text-lg hover:bg-black/10 hover:text-black/90 hover:border-black/10 border transition">
               <Icon icon="mynaui:user-solid" className="text-2xl inline-block mr-2" />
               More about me
             </NavLink>
@@ -254,7 +254,7 @@ const Home = () => {
 
                   <div className="flex items-center gap-4 mb-2">
                     <div className="w-24 h-24 bg-black/10 rounded-lg overflow-hidden shadow-sm shrink-0">
-                      <div className="w-full h-full bg-gradient-to-br from-gray-400 to-gray-600 flex items-center justify-center overflow-hidden rounded">
+                      <div className="w-full h-full bg-linear-to-br from-gray-400 to-gray-600 flex items-center justify-center overflow-hidden rounded">
                         <img
                           src={current.img}
                           alt="Album Art"
@@ -273,7 +273,7 @@ const Home = () => {
               </AnimatePresence>
 
               {/* Static Controls */}
-              <div className="flex items-center gap-3 mt-1 mb-6 pl-[7rem]">
+              <div className="flex items-center gap-3 mt-1 mb-6 pl-28">
                 <Icon
                   icon="mdi:skip-previous"
                   onClick={prev}
