@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Junicode';
+  src: url('/fonts/Junicode.ttf');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Junicode';
+  src: url('/fonts/Junicode-Italic.ttf');
+  font-style: italic;
+}
+
+@theme {
+  --color-primary: #F76F53;
+  --color-background: #fff;
+  --font-sans: "DM Sans", sans-serif;
+  --font-serif: "Junicode", serif;
+}
+
+body {
+  @apply bg-background;
+  @apply font-sans;
+}
+
+/* Smooth scroll behaviour */
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-primary;
+  @apply rounded-xl;
+}
+
+/* Text select */
+
+::selection {
+  @apply bg-primary;
+  @apply text-white;
+}
