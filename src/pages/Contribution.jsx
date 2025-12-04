@@ -47,10 +47,12 @@ const Contribution = () => {
                                     </div>
                                 </div>
 
-                                <div className="flex-1 flex items-center justify-center bg-black/5 rounded-3xl min-h-[300px]">
-                                    <div className="text-center space-y-2 opacity-40">
-                                        Cindral Hero Image
-                                    </div>
+                                <div className="flex-1 flex items-center justify-center bg-black/5 rounded-3xl min-h-[300px] p-10">
+                                    <img
+                                        src="/logo.png"
+                                        alt="Cindral logo"
+                                        className="w-full max-w-[220px] object-contain opacity-80"
+                                    />
                                 </div>
                             </div>
                         </div>
