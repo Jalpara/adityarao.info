@@ -102,8 +102,8 @@ export default function Navbar() {
             to="/now"
             className={({ isActive }) =>
               `px-4 py-1.5 rounded-full font-bold ${isActive
-                ? "text-white bg-linear-to-b from-[#F96282] to-[#9A59CE]"
-                : "text-transparent bg-clip-text bg-linear-to-b from-[#F96282] to-[#9A59CE]"
+                ? "text-white bg-[#F26A4F]"
+                : "text-transparent bg-clip-text bg-[#E0553B]"
               }`
             }
           >

@@ -24,7 +24,7 @@ const Contribution = () => {
                             <div className="flex flex-col md:flex-row gap-10 relative z-10">
                                 <div className="flex-1 space-y-6">
                                     <div className="flex items-center gap-3">
-                                        <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium tracking-wide uppercase">Founder & Lead</span>
+                                        <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium tracking-wide uppercase">Founding Director</span>
                                         <span className="px-3 py-1 bg-black/5 text-black/60 rounded-full text-sm font-medium tracking-wide uppercase">2025 — Present</span>
                                     </div>
 
@@ -36,11 +36,12 @@ const Contribution = () => {
                                     </div>
 
                                     <p className="text-lg opacity-70 leading-relaxed max-w-xl">
-                                        I'm building Cindral to prove tech can shape better humans, not just better systems. 
+                                       At Cindral, we build more than projects - <br /> we build people. <br /> 
+                                       Our goal isn’t to run faster - it’s to move with clarity. We don’t chase trends; we make an impact
                                     </p>
 
                                     <div className="flex flex-wrap gap-2 pt-2">
-                                        {["Design and Code Lab", "Digital Experiments", "Studio", "AI Tools", "Creative Coding",].map(tag => (
+                                        {["Design & Development", "Experimentations", "Mindful Work", "Curiosity over Hustle", "People over Systems",].map(tag => (
                                             <span key={tag} className="px-3 py-1 border border-black/10 rounded-lg text-sm opacity-60">{tag}</span>
                                         ))}
                                     </div>
@@ -62,18 +63,18 @@ const Contribution = () => {
                         <div className="bg-black/5 p-8 rounded-3xl space-y-6 hover:bg-black/10 transition group">
                             <div className="flex justify-between items-start">
                                 <div className="p-3 bg-white rounded-2xl shadow-sm">
-                                    <Icon icon="mdi:controller" className="text-3xl text-primary" />
+                                    <Icon icon="mdi:art" className="text-3xl text-primary" />
                                 </div>
                             </div>
 
                             <div className="space-y-2">
-                                <h3 className="text-2xl font-medium font-serif">Cindral Entertainment</h3>
-                                <p className="text-lg opacity-70">Creating immersive user experiences for everyone.</p>
+                                <h3 className="text-2xl font-medium font-serif">Sva:Rang</h3>
+                                <p className="text-lg opacity-70">A gentle space for self-expression and creativity.</p>
                             </div>
 
                             <div className="pt-4 border-t border-black/5">
                                 <p className="opacity-60 text-sm leading-relaxed">
-                                    Designing and developing engaging virtual worlds and interactive experiences that captivate users of all ages.
+                                    Sva:Rang encourages people to discover their inner voice and express it without hesitation.
                                 </p>
                             </div>
                         </div>
@@ -88,12 +89,12 @@ const Contribution = () => {
 
                             <div className="space-y-2">
                                 <h3 className="text-2xl font-medium font-serif">KSAYAASPAA</h3>
-                                <p className="text-lg opacity-70">Designing a contemplative wellness retreat brand.</p>
+                                <p className="text-lg opacity-70">Supporting elders, children, and education through a dedicated trust.</p>
                             </div>
 
                             <div className="pt-4 border-t border-black/5">
                                 <p className="opacity-60 text-sm leading-relaxed">
-                                    Crafting the identity and spatial experience for a wellness sanctuary focused on mindfulness, restoration, and connection with nature.
+                                    Designing a purposeful identity for a trust focused on care, learning, and upliftment across generations.
                                 </p>
                             </div>
                         </div>
@@ -109,10 +110,10 @@ const Contribution = () => {
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="space-y-2">
                                     <h3 className="text-2xl font-medium font-serif">MrVibe</h3>
-                                    <p className="text-lg opacity-70">Legacy of Aditya that continues with his past work</p>
+                                    <p className="text-lg opacity-70">The roots of my creative journey.</p>
                                 </div>
                                 <div className="opacity-60 text-sm leading-relaxed flex items-center">
-                                    This version of Aditya is a tribute to his earlier contributions, preserving the essence of his work while embracing new opportunities for growth and innovation.
+                                    MrVibe represents my early years of experimenting, creating, and learning in public. This section preserves that energy while allowing me to grow into newer, more intentional work.
                                 </div>
                             </div>
                         </div>

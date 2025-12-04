@@ -47,9 +47,12 @@ const Footer = () => {
                 Aditya Rao
               </h2>
               <p className="text-black/60 text-lg leading-relaxed max-w-sm">
-                Observing small wins in reading, movement, and music from Navi
-                Mumbai.
+                Learning a little, moving a little, creating a little every day.
               </p>
+              <div className="mt-4 flex flex-col gap-1 text-sm text-black/40">
+                <p>Today's Date: {formatDate(time)}</p>
+                <p>© 2025 Aditya Rao. All rights reserved.</p>
+              </div>
             </div>
           </div>
 
@@ -108,10 +111,7 @@ const Footer = () => {
               </a>
             </div>
 
-            <div className="flex flex-col gap-1 text-sm text-black/40">
-              <p>Today's Date: {formatDate(time)}</p>
-              <p>© 2025 Aditya Rao. All rights reserved.</p>
-            </div>
+            
           </div>
         </div>
       </div>

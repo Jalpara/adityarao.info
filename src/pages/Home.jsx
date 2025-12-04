@@ -1,7 +1,7 @@
 import { Icon } from "@iconify/react";
 import { useState, useEffect } from "react";
 import { NavLink } from 'react-router-dom';
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useAnimation } from "framer-motion";
 import LocationCard from "../components/LocationCard.jsx";
 
 const Home = () => {
@@ -48,14 +48,22 @@ const Home = () => {
       title: "Wholeness",
       artist: "Sounds of Isha",
       img: "/albums/wholeness_sounds_of_isha.png",
-      url: "https://open.spotify.com/track/42tMEuh2YlMXa8iWKaMfan",
+      spotifyId: "42tMEuh2YlMXa8iWKaMfan",
+      spotifyUrl: "https://open.spotify.com/track/42tMEuh2YlMXa8iWKaMfan",
       lyrics: [
-        "What is the truth? What is the untruth?",
-        "It's not in the words that you speak.",
-        "It's in the way you hold the life within you,",
-        "It's in the way you are",
+        "What is truth? What is untruth?",
+        "It's not in the words that you speak",
+        "It's in the way you hold the life within you, it's in the way you are",
         "Whether you are a crawling worm or a big human being",
-        "When sun comes up in the morning",
+        "When sun comes up in the morning, it lights up everybody",
+        "Whoever open his eyes for him, there is light to see",
+        "So essential nature of life is all-inclusive",
+        "This is the truth",
+        "If you sit here like that, absolutely all-inclusive",
+        "You are in touch with truth",
+        "If you're in touch with truth",
+        "There can be no suffering in you",
+        "It's as simple as that",
       ],
     },
     {
@@ -63,23 +71,36 @@ const Home = () => {
       title: "Gratitude at 432Hz",
       artist: "Rakesh Chaurasia",
       img: "/albums/gratitude.jpeg",
-      url: "https://open.spotify.com/track/210uN31E64RF58k4j6Gh4f",
+      spotifyId: "210uN31E64RF58k4j6Gh4f",
+      spotifyUrl: "https://open.spotify.com/track/210uN31E64RF58k4j6Gh4f",
       lyrics: ["This music does not have any lyrics. "],
     },
   ];
 
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState(0);
+  const prevControls = useAnimation();
+  const nextControls = useAnimation();
   const current = songs[index];
 
   const next = () => {
     setDirection(1);
     setIndex((prev) => (prev + 1) % songs.length);
+    nextControls.start({
+      scale: [1, 0.85, 1],
+      rotate: [0, 10, 0],
+      transition: { duration: 0.35, ease: "easeOut" },
+    });
   };
 
   const prev = () => {
     setDirection(-1);
     setIndex((prev) => (prev - 1 + songs.length) % songs.length);
+    prevControls.start({
+      scale: [1, 0.85, 1],
+      rotate: [0, -10, 0],
+      transition: { duration: 0.35, ease: "easeOut" },
+    });
   };
 
   const variants = {
@@ -98,19 +119,6 @@ const Home = () => {
       opacity: 0,
     }),
   };
-
-  const play = () => {
-    window.open(current.url, "_blank");
-  };
-
-  const blurLevels = [
-    "blur-[1px]",
-    "blur-[2px]",
-    "blur-[3px]",
-    "blur-[4px]",
-    "blur-[5px]",
-    "blur-[6px]",
-  ];
 
   return (
     <main className="min-h-screen w-full text-black">
@@ -137,8 +145,7 @@ const Home = () => {
             </h1>
 
             <p className="font-serif tracking-tight text-base sm:text-lg opacity-70">
-              Focused on getting better every day. Reading regularly, training
-              with intent, and practicing flute in Navi Mumbai.
+              I’m exploring what it means to live, learn, and create with intention. Books, movement, music, and meaningful work
             </p>
           </div>
 
@@ -157,7 +164,7 @@ const Home = () => {
         </div>
 
         {/* DESKTOP MAP */}
-        <a href="https://maps.app.goo.gl/3VASy4hvGj7mUY1H9" target="_blank" className="hidden md:flex justify-center items-start pt-20 group">
+        <a href="https://maps.app.goo.gl/Tf97HMsqfryYX8hB8" target="_blank" className="hidden md:flex justify-center items-start pt-20 group">
           <div className="relative">
             <img src="/navi_mumbai_map.png" className="w-full max-w-[450px] opacity-30 object-cover pointer-events-none" />
             <div className="absolute top-1/2 left-1/2 translate-x-1/2 -translate-y-1/2 text-2xl font-semibold text-black/70 group-hover:scale-100 scale-0 transition opacity-0 group-hover:opacity-100">
@@ -171,8 +178,8 @@ const Home = () => {
       <section className="w-full py-20 flex flex-col items-center gap-16 px-6">
         <div className="text-center space-y-4">
           <p className="text-3xl md:text-5xl font-serif opacity-80 max-w-4xl leading-tight">
-            I’m working on staying{" "}
-            <span className="text-primary">consistent</span> and improving slowly.
+            I’m choosing{" "}
+            <span className="text-primary">consistency</span>, patience, and slow, meaningful growth.
           </p>
         </div>
 
@@ -223,6 +230,12 @@ const Home = () => {
                     <span className="opacity-50">— Thomas Erikson</span>
                   </p>
                 </div>
+                <div>
+                  <p className="text-xl font-medium text-[#2e2e2e]">
+                    The Eight Spiritual Breaths{" "}
+                    <br /><span className="opacity-50">— Santosh Sachdeva</span>
+                  </p>
+                </div>
               </div>
             </div>
           </div>
@@ -230,7 +243,7 @@ const Home = () => {
           {/* Right Column */}
           <div className="flex flex-col gap-6">
             {/* On Repeat Card */}
-            <div className="bg-black/5 p-8 pb-0 rounded-3xl overflow-hidden relative">
+            <div className="bg-black/5 p-8 rounded-3xl overflow-hidden relative">
               <AnimatePresence mode="wait" custom={direction} initial={false}>
                 <motion.div
                   key={index}
@@ -272,28 +285,9 @@ const Home = () => {
                 </motion.div>
               </AnimatePresence>
 
-              {/* Static Controls */}
-              <div className="flex items-center gap-3 mt-1 mb-6 pl-28">
-                <Icon
-                  icon="mdi:skip-previous"
-                  onClick={prev}
-                  className="text-2xl opacity-60 hover:opacity-100 cursor-pointer"
-                />
-                <Icon
-                  icon="mdi:play"
-                  onClick={play}
-                  className="text-2xl opacity-60 hover:opacity-100 cursor-pointer"
-                />
-                <Icon
-                  icon="mdi:skip-next"
-                  onClick={next}
-                  className="text-2xl opacity-60 hover:opacity-100 cursor-pointer"
-                />
-              </div>
-
               <AnimatePresence mode="wait" custom={direction} initial={false}>
                 <motion.div
-                  key={index}
+                  key={`controls-${index}`}
                   custom={direction}
                   variants={variants}
                   initial="enter"
@@ -303,22 +297,50 @@ const Home = () => {
                     x: { type: "spring", stiffness: 300, damping: 30 },
                     opacity: { duration: 0.2 },
                   }}
-                  className="relative p-4 pb-0 overflow-clip h-[140px]"
+                  className="flex items-center gap-3 mt-1 mb-4 pl-28 flex-wrap"
                 >
-                  <div className="leading-relaxed tracking-tight text-black/50 group">
-                    {current.lyrics.map((line, i) => (
-                      <p
-                        key={i}
-                        className={`group-hover:blur-none ${blurLevels[i]} transition`}
-                      >
-                        {line}
-                      </p>
-                    ))}
-                  </div>
-
-                  <div className="pointer-events-none absolute bottom-0 left-0 w-full h-full bg-linear-to-b from-transparent to-transparent"></div>
+                  <motion.button
+                    type="button"
+                    onClick={prev}
+                    animate={prevControls}
+                    whileTap={{ scale: 0.9 }}
+                    className="text-2xl text-[#2e2e2e] opacity-60 hover:opacity-100 cursor-pointer"
+                    aria-label="Previous song"
+                  >
+                    <Icon icon="mdi:skip-previous" />
+                  </motion.button>
+                  <a
+                    href={current.spotifyUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 text-sm font-medium bg-white/80 px-4 py-2 rounded-full shadow-sm hover:shadow-md transition"
+                  >
+                    <Icon icon="mdi:spotify" className="text-2xl text-[#1DB954]" />
+                    Listen on Spotify
+                  </a>
+                  <motion.button
+                    type="button"
+                    onClick={next}
+                    animate={nextControls}
+                    whileTap={{ scale: 0.9 }}
+                    className="text-2xl text-[#2e2e2e] opacity-60 hover:opacity-100 cursor-pointer"
+                    aria-label="Next song"
+                  >
+                    <Icon icon="mdi:skip-next" />
+                  </motion.button>
                 </motion.div>
               </AnimatePresence>
+
+              <div className="relative p-4 rounded-2xl bg-white/70 max-h-[170px] overflow-y-auto">
+                <div className="leading-relaxed tracking-tight text-black/60">
+                  {current.lyrics.map((line, i) => (
+                    <p key={i} className="py-0.5">
+                      {line}
+                    </p>
+                  ))}
+                </div>
+                <div className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-b from-transparent to-white"></div>
+              </div>
             </div>
 
             {/* Time & Location Card */}
@@ -360,7 +382,7 @@ const Home = () => {
             {/* Contribution */}
             <NavLink to="/contribution" className="bg-white p-8 rounded-3xl hover:shadow-xl transition duration-300 group flex flex-col justify-between h-64">
               <div className="space-y-2">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition">
+                <div className="w-12 h-12 bg-black/5 text-black/70 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition">
                   <Icon icon="mdi:briefcase-outline" className="text-2xl" />
                 </div>
                 <h3 className="text-2xl font-serif font-medium">Contribution</h3>

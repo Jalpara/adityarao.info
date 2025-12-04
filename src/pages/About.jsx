@@ -139,7 +139,7 @@ const About = () => {
                             <span className="opacity-40 font-serif italic text-lg">Toolbox</span>
                         </div>
                         <div className="flex flex-wrap gap-2 content-end">
-                            {["Flute", "Cycle", "Obsidian", "MacBook", "React", "Tailwind"].map((item) => (
+                            {["M1 Mac Mini", "13″ M2 iPad Pro", "iPhone 13 Mini", "Pixel 6a", "AirPods Pro"].map((item) => (
                                 <span key={item} className="px-4 py-2 bg-white/60 rounded-xl text-sm opacity-80 font-medium border border-black/5">
                                     {item}
                                 </span>
